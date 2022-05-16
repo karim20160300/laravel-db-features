@@ -19,3 +19,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('articles', 'App\Http\Controllers\ArticleController@index');
+Route::get('DBRawExamples', 'App\Http\Controllers\ArticleController@DBRawExamples');
