@@ -38,4 +38,61 @@ class ArticleController extends Controller
         
         return $articlesWithDBRaw;
     }
+
+    public function collections(){
+        // return 'hello collections';
+        /**
+         * Too Slow 8.9s
+         */
+        // $articles = Article::withoutGlobalScope(ArticleUserScope::class)->inRandomOrder()->take(100)->get();
+
+        /**
+         * fast
+         */
+        $articles = Article::withoutGlobalScope(ArticleUserScope::class)->take(100)->get();
+        /**
+         * prepend will allow me to add fake option like the bellow one
+         */
+        // ->prepend(new Article(['title' => 'Please select your article']));
+
+        /**
+         * too slow also
+         */
+        // $articles = Article::withoutGlobalScope(ArticleUserScope::class)->orderByRaw('RAND()')->take(100)->get();
+
+        // return $articles;
+        $collection = $articles->filter(function($article){
+            return strlen($article->title) < 40 ;
+        })->shuffle()->map(function($article){
+            return $article->title;
+        });
+
+        // return gettype($collection);
+        return $collection;
+        /**
+         * map
+         * apply someting on each elemnt on collection and recreate it
+         */
+
+         /**
+          * filter
+          * apply specific filter on the given collection and return the collected data
+          */
+
+          /**
+           * shuffle
+           * produce data in random order
+           */
+    }
+
+    public function collectionsChunk(){
+        $articles = Article::get()->shuffle()->chunk(3); // if we want to chunk our data
+        dd($articles);
+    }
+    
+    public function collectionsRandomArticle(){
+        // $articles = Article::withoutGlobalScope(ArticleUserScope::class)->take(100)->get()->random(); // if we want to chunk our data
+        $articles = Article::withoutGlobalScope(ArticleUserScope::class)->inRandomOrder()->first(); // if we want to chunk our data
+        dd($articles->title);
+    }
 }

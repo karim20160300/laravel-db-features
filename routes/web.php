@@ -16,3 +16,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('collectionsChunk', 'App\Http\Controllers\ArticleController@collectionsChunk');
+Route::get('collectionsRandomArticle', 'App\Http\Controllers\ArticleController@collectionsRandomArticle');

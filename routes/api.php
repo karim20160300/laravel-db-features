@@ -20,3 +20,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get('articles', 'App\Http\Controllers\ArticleController@index');
 Route::get('DBRawExamples', 'App\Http\Controllers\ArticleController@DBRawExamples');
+Route::get('collections', 'App\Http\Controllers\ArticleController@collections');
+Route::get('collectionsChunk', 'App\Http\Controllers\ArticleController@collectionsChunk');
