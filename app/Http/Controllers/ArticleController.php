@@ -95,4 +95,11 @@ class ArticleController extends Controller
         $articles = Article::withoutGlobalScope(ArticleUserScope::class)->inRandomOrder()->first(); // if we want to chunk our data
         dd($articles->title);
     }
+
+    public function getTheMostBlogedUser(){
+        $articles = Article::get();
+        return $articles->mode('user_id');
+
+        
+    }
 }

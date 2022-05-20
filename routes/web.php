@@ -19,3 +19,4 @@ Route::get('/', function () {
 
 Route::get('collectionsChunk', 'App\Http\Controllers\ArticleController@collectionsChunk');
 Route::get('collectionsRandomArticle', 'App\Http\Controllers\ArticleController@collectionsRandomArticle');
+Route::get('getTheMostBlogedUser', 'App\Http\Controllers\ArticleController@getTheMostBlogedUser');
