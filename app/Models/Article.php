@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
@@ -42,6 +43,9 @@ class Article extends Model
     }
 
   
+    public function media(){
+        return $this->morphMany(Media::class, 'model');
+    }
 
 
 }

@@ -45,4 +45,9 @@ class User extends Authenticatable
     public function articles(){
         return $this->hasMany(Article::class);
     }
+
+    public function media(){
+        return $this->morphMany(Media::class, 'model');
+    }
+
 }

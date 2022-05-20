@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Article;
+use App\Models\Media;
 use App\Scopes\ArticleUserScope;
 use DB;
 class ArticleController extends Controller
@@ -98,8 +99,31 @@ class ArticleController extends Controller
 
     public function getTheMostBlogedUser(){
         $articles = Article::get();
-        return $articles->mode('user_id');
+        return $articles->mode('user_id');   
+    }
 
+    public function store(Request $request)
+    {
+        // this function without any validation or any real images just for using polymerphic relations and understand it
+        $article = Article::create([
+            'title' => $request->title,
+            'body' => $request->body,
+            'user_id' => 1,
+        ]);
+
+        Media::create([
+            'model_id' => $article->id,
+            'model_name' => 'App\Models\Article',
+            'file' => $request->file,
+        ]);
+
+        return 'created successfully!';
+    }
+
+    public function show(){
+        $id = 984686;
+        $article = Article::withoutGlobalScope(ArticleUserScope::class)->with('media')->find($id);
+        return $article;
         
     }
 }
